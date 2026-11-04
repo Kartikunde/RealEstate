@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const loan_controller_1 = require("../controllers/loan.controller");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const validate_middleware_1 = require("../middleware/validate.middleware");
+const schemas_1 = require("../schemas");
+const router = (0, express_1.Router)();
+router.use(auth_middleware_1.authenticateJwt);
+router.get('/', loan_controller_1.LoanController.getLoans);
+router.get('/:id', loan_controller_1.LoanController.getLoanById);
+router.post('/', (0, validate_middleware_1.validateRequest)(schemas_1.loanSchema), loan_controller_1.LoanController.createLoan);
+router.post('/calculate-preview', loan_controller_1.LoanController.calculatePreview);
+router.post('/payments', loan_controller_1.LoanController.recordEmiPayment);
+exports.default = router;

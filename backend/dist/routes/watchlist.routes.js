@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const watchlist_controller_1 = require("../controllers/watchlist.controller");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const router = (0, express_1.Router)();
+router.use(auth_middleware_1.authenticateJwt);
+router.get('/', watchlist_controller_1.WatchlistController.getWatchlist);
+router.post('/', watchlist_controller_1.WatchlistController.addToWatchlist);
+router.delete('/:listingId', watchlist_controller_1.WatchlistController.removeFromWatchlist);
+exports.default = router;

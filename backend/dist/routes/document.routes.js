@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const document_controller_1 = require("../controllers/document.controller");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const upload_middleware_1 = require("../middleware/upload.middleware");
+const router = (0, express_1.Router)();
+router.use(auth_middleware_1.authenticateJwt);
+router.get('/', document_controller_1.DocumentController.getDocuments);
+router.get('/:id/download', document_controller_1.DocumentController.downloadDocument);
+router.post('/upload', upload_middleware_1.upload.single('file'), document_controller_1.DocumentController.uploadDocument);
+router.delete('/:id', document_controller_1.DocumentController.deleteDocument);
+exports.default = router;

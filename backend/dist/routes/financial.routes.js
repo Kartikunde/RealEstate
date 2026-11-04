@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const financial_controller_1 = require("../controllers/financial.controller");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const validate_middleware_1 = require("../middleware/validate.middleware");
+const schemas_1 = require("../schemas");
+const router = (0, express_1.Router)();
+router.use(auth_middleware_1.authenticateJwt);
+router.get('/', financial_controller_1.FinancialController.getRecords);
+router.post('/', (0, validate_middleware_1.validateRequest)(schemas_1.financialRecordSchema), financial_controller_1.FinancialController.createRecord);
+router.delete('/:id', financial_controller_1.FinancialController.deleteRecord);
+exports.default = router;
