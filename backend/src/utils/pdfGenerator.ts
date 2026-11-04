@@ -5,7 +5,7 @@ export class PdfReportGenerator {
   /**
    * Generates a branded PropVest PDF report header
    */
-  private static renderHeader(doc: PDFKit.PDFDocument, title: string, subtitle: string, userName: string) {
+  private static renderHeader(doc: InstanceType<typeof PDFDocument>, title: string, subtitle: string, userName: string) {
     // Brand header background
     doc.rect(0, 0, doc.page.width, 90).fill('#14213D');
 
