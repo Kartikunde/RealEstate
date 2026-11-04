@@ -40,7 +40,20 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static uploads (receipts, property documents, images)
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
-// Health check endpoint
+// Health check endpoints (Render / monitoring probes)
+app.get('/', (_req: Request, res: Response) => {
+  res.status(200).json({
+    status: 'ONLINE',
+    platform: 'PropVest – Real Estate Investment & Property Portfolio Management Platform',
+    version: '1.0.0',
+    documentation: '/api/health',
+  });
+});
+
+app.get('/health', (_req: Request, res: Response) => {
+  res.status(200).json({ status: 'ONLINE', timestamp: new Date().toISOString() });
+});
+
 app.get('/api/health', (_req: Request, res: Response) => {
   res.status(200).json({
     status: 'ONLINE',

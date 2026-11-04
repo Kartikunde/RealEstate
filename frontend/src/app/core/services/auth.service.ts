@@ -1,3 +1,4 @@
+import { environment } from '../../../environments/environment';
 import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -9,7 +10,7 @@ import { ToastService } from './toast.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = `${environment.apiUrl}/auth`;
   private tokenKey = 'propvest_auth_token';
 
   currentUser = signal<User | null>(null);
@@ -112,3 +113,4 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 }
+
