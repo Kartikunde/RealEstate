@@ -109,36 +109,15 @@ import { ToastService } from '../../../core/services/toast.service';
             </button>
           </form>
 
-          <!-- Quick Test Credentials -->
-          <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
-            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 text-center mb-2.5">
-              Instant Demo Fill
-            </p>
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                (click)="fillDemo('investor')"
-                class="py-2 px-3 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              >
-                Investor Demo
-              </button>
-              <button
-                type="button"
-                (click)="fillDemo('admin')"
-                class="py-2 px-3 rounded-lg text-xs font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/60 transition-colors"
-              >
-                Admin Demo
-              </button>
-            </div>
-          </div>
-
           <!-- Registration Link -->
-          <p class="text-center text-xs text-slate-600 dark:text-slate-400">
-            Don't have an account yet?
-            <a routerLink="/register" class="font-bold text-blue-600 dark:text-blue-400 hover:underline">
-              Create an account
-            </a>
-          </p>
+          <div class="pt-2 border-t border-slate-100 dark:border-slate-800 text-center">
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              Don't have an account yet?
+              <a routerLink="/register" class="font-bold text-blue-600 dark:text-blue-400 hover:underline ml-1">
+                Create an account
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -171,20 +150,6 @@ export class LoginComponent {
     this.showPassword.update((v) => !v);
   }
 
-  fillDemo(type: 'investor' | 'admin'): void {
-    if (type === 'investor') {
-      this.loginForm.setValue({
-        email: 'demo@propvest.in',
-        password: 'Demo@123',
-      });
-    } else {
-      this.loginForm.setValue({
-        email: 'admin@propvest.in',
-        password: 'Admin@123',
-      });
-    }
-  }
-
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -201,7 +166,7 @@ export class LoginComponent {
       },
       error: (err) => {
         this.loading.set(false);
-        const msg = err.error?.message || 'Invalid email or password. If local database is offline, please ensure server is active.';
+        const msg = err.error?.message || 'Invalid email or password. Please try again.';
         this.errorMessage.set(msg);
         this.toast.error('Authentication Failed', msg);
       },

@@ -126,7 +126,7 @@ export class ForgotPasswordComponent {
       next: (res) => {
         this.loading.set(false);
         this.successMessage.set(
-          res.message || 'If an account exists with this email, reset instructions have been issued. (In demo environment: use Demo@123).'
+          res.message || 'If an account exists with this email, password reset instructions have been sent.'
         );
         this.toast.info('Password Reset', 'Instructions recorded.');
       },
